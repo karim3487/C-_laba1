@@ -9,10 +9,11 @@ using namespace std;
 
 
 class Rational {
-
-public:
     int numerator; //числитель
     int denominator; //знаменатель
+public:
+    const string ENTER_NUMERATOR = "Введите числитель: ";
+    const string ENTER_DENOMINATOR = "Введите знаменатель: ";
     Rational(int valueNumerator = 2, int valueDenominator = 4) {
         numerator = valueNumerator;
         denominator = valueDenominator;
@@ -33,22 +34,26 @@ public:
         cout << "Вы ввели " << numerator << "/" << (float)denominator << endl;
     }
     void Print(float x) {
-        cout << x << endl;
+        cout << "\nЭто число в десятичной форме имеет вид " << x << endl;
     }
     operator float();
-    float Proizv(float x, float y){
-        return x * y;
+    void Composition(float x, float y){
+        float composition;
+        composition = x * y;
+        cout << "Произведение чисел " << composition << endl;
     }
-    float Proizv(int x, float y) {
-        return x * y;
+    void Composition(int x, float y) {
+        float composition;
+        composition = x * y;
+        cout << "Произведение чисел " << composition << endl;
     }
-    void Ravenstv(float x, float y){
+    void Equality(float x, float y){
         if (x == y)
             cout << "Числа равны" << endl;
         else
             cout << "Числа не равны!" << endl;
     }
-    void Ravenstv(int x, float y) {
+    void Equality(int x, float y) {
         if (x == y)
             cout << "Числа равны" << endl;
         else
@@ -78,61 +83,62 @@ int main() {
         menu = getchar();
         switch (menu)
         {
-            case '1': {cout << "Введите числитель: " << endl;
+            case '1': {
+                cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << numDelDem.ENTER_DENOMINATOR << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
                 x = (float)numDelDem;
-                cout << "\nЭто число в десятичной форме имеет вид " << x << endl;
+                numDelDem.Print(x);
                 system("pause");
                 break;
             }
             case '2':
             {
-                cout << "Введите числитель: " << endl;
+                cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << numDelDem.ENTER_DENOMINATOR << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
                 x = (float)numDelDem;
 
-                cout << "Введите числитель: " << endl;
+                cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << numDelDem.ENTER_DENOMINATOR<< endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 y = (float)numDelDem;
-                proizv = x * y;
-                cout << "Произведение чисел " << proizv << endl;
+                numDelDem.Composition(num, dem);
+
                 system("pause");
                 break;
             }
             case '3':
             {
-                cout << "Введите числитель: " << endl;
+                cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << numDelDem.ENTER_DENOMINATOR << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
                 x = (float)numDelDem;
 
-                cout << "Введите числитель: " << endl;
+                cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << numDelDem.ENTER_DENOMINATOR << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
                 y = (float)numDelDem;
-                numDelDem.Ravenstv(x, y);
+                numDelDem.Equality(x, y);
                 system("pause");
             }
             case '4':
