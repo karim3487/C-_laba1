@@ -1,6 +1,6 @@
-/*Класс «Рациональное число»(РЧ).Поля: числитель, знаменатель.Методы : перегрузка
-операции приведения типа к float, операций умножения « * » двух РЧ и РЧ с целым числом,
-сравнения на равенство « == » двух РЧ и РЧ с целым числом.*/
+/*РљР»Р°СЃСЃ В«Р Р°С†РёРѕРЅР°Р»СЊРЅРѕРµ С‡РёСЃР»РѕВ»(Р Р§).РџРѕР»СЏ: С‡РёСЃР»РёС‚РµР»СЊ, Р·РЅР°РјРµРЅР°С‚РµР»СЊ.РњРµС‚РѕРґС‹ : РїРµСЂРµРіСЂСѓР·РєР°
+РѕРїРµСЂР°С†РёРё РїСЂРёРІРµРґРµРЅРёСЏ С‚РёРїР° Рє float, РѕРїРµСЂР°С†РёР№ СѓРјРЅРѕР¶РµРЅРёСЏ В« * В» РґРІСѓС… Р Р§ Рё Р Р§ СЃ С†РµР»С‹Рј С‡РёСЃР»РѕРј,
+СЃСЂР°РІРЅРµРЅРёСЏ РЅР° СЂР°РІРµРЅСЃС‚РІРѕ В« == В» РґРІСѓС… Р Р§ Рё Р Р§ СЃ С†РµР»С‹Рј С‡РёСЃР»РѕРј.*/
 
 #include <iostream>
 #include <string>
@@ -11,8 +11,8 @@ using namespace std;
 class Rational {
 
 public:
-    int numerator; //числитель
-    int denominator; //знаменатель
+    int numerator; //С‡РёСЃР»РёС‚РµР»СЊ
+    int denominator; //Р·РЅР°РјРµРЅР°С‚РµР»СЊ
     Rational(int valueNumerator = 2, int valueDenominator = 4) {
         numerator = valueNumerator;
         denominator = valueDenominator;
@@ -30,7 +30,7 @@ public:
         denominator = valueDenominator;
     }
     void Print() {
-        cout << "Вы ввели " << numerator << "/" << (float)denominator << endl;
+        cout << "Р’С‹ РІРІРµР»Рё " << numerator << "/" << (float)denominator << endl;
     }
     void Print(float x) {
         cout << x << endl;
@@ -44,15 +44,15 @@ public:
     }
     void Ravenstv(float x, float y){
         if (x == y)
-            cout << "Числа равны" << endl;
+            cout << "Р§РёСЃР»Р° СЂР°РІРЅС‹" << endl;
         else
-            cout << "Числа не равны!" << endl;
+            cout << "Р§РёСЃР»Р° РЅРµ СЂР°РІРЅС‹!" << endl;
     }
     void Ravenstv(int x, float y) {
         if (x == y)
-            cout << "Числа равны" << endl;
+            cout << "Р§РёСЃР»Р° СЂР°РІРЅС‹" << endl;
         else
-            cout << "Числа не равны!" << endl;
+            cout << "Р§РёСЃР»Р° РЅРµ СЂР°РІРЅС‹!" << endl;
     }
 };
 Rational::operator float()
@@ -62,83 +62,71 @@ Rational::operator float()
 
 
 int main() {
-    setlocale(LC_ALL, "Russian");
-   /* float num, dem;
-    do
-    {
-        cout << "Введите значения" << endl;
-        cout << "Числитель: ";
-        cin >> num;
-        cout << "Знаменатель: ";
-        cin >> dem;
-        if (dem == 0) cout << "Числитель равен нулю, это не рациональное число!" << endl;
-    } while (dem == 0);
-    Rational fraction(num, dem);
-    fraction.Print();*/
+    system("chcp 65001");
     int num, dem;
     float x, y, proizv;
     Rational numDelDem;
-    
 
-        char menu;
-        do {
-            system("CLS");
-            puts("1. Посмотрить РЧ в десятичном виде");
-            puts("2. Умножить два РЧ или РЧ и целое число");
-            puts("3. Проверить числа на равенство");
-            puts("4. Выход");
-            menu = getchar();
-            switch (menu)
-            {
-            case '1': {cout << "Введите числитель: " << endl;
+
+    char menu;
+    do {
+        system("CLS");
+        puts("1. РџРѕСЃРјРѕС‚СЂРёС‚СЊ Р Р§ РІ РґРµСЃСЏС‚РёС‡РЅРѕРј РІРёРґРµ");
+        puts("2. РЈРјРЅРѕР¶РёС‚СЊ РґРІР° Р Р§ РёР»Рё Р Р§ Рё С†РµР»РѕРµ С‡РёСЃР»Рѕ");
+        puts("3. РџСЂРѕРІРµСЂРёС‚СЊ С‡РёСЃР»Р° РЅР° СЂР°РІРµРЅСЃС‚РІРѕ");
+        puts("4. Р’С‹С…РѕРґ");
+        menu = getchar();
+        switch (menu)
+        {
+            case '1': {cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»РёС‚РµР»СЊ: " << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°РјРµРЅР°С‚РµР»СЊ: " << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
                 x = (float)numDelDem;
-                cout << "\nЭто число в десятичной форме имеет вид " << x << endl;
+                cout << "\nР­С‚Рѕ С‡РёСЃР»Рѕ РІ РґРµСЃСЏС‚РёС‡РЅРѕР№ С„РѕСЂРјРµ РёРјРµРµС‚ РІРёРґ " << x << endl;
                 system("pause");
                 break;
             }
-            case '2': 
+            case '2':
             {
-                cout << "Введите числитель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»РёС‚РµР»СЊ: " << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°РјРµРЅР°С‚РµР»СЊ: " << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
                 x = (float)numDelDem;
 
-                cout << "Введите числитель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»РёС‚РµР»СЊ: " << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°РјРµРЅР°С‚РµР»СЊ: " << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 y = (float)numDelDem;
                 proizv = x * y;
-                cout << "Произведение чисел " << proizv << endl;
+                cout << "РџСЂРѕРёР·РІРµРґРµРЅРёРµ С‡РёСЃРµР» " << proizv << endl;
                 system("pause");
                 break;
             }
             case '3':
             {
-                cout << "Введите числитель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»РёС‚РµР»СЊ: " << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°РјРµРЅР°С‚РµР»СЊ: " << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
                 x = (float)numDelDem;
 
-                cout << "Введите числитель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»РёС‚РµР»СЊ: " << endl;
                 cin >> num;
-                cout << "Введите знаменатель: " << endl;
+                cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°РјРµРЅР°С‚РµР»СЊ: " << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
@@ -151,8 +139,8 @@ int main() {
                 system("CLS");
                 return 0;
                 break;
-            }
-        } while (true);
-            return 0;
+        }
+    } while (true);
+    return 0;
 }
 
