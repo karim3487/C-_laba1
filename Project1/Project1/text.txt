@@ -1,0 +1,6 @@
+data type		byte	max value	
+bool	1	
+123123
+123123
+
+123123
