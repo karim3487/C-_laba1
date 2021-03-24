@@ -16,72 +16,98 @@ public:
     const string ENTER_NUMERATOR = "Введите числитель: ";
     const string ENTER_DENOMINATOR = "Введите знаменатель: ";
     const string ENTER_INTEGER = "Введите целое число: ";
+    const string NUMBERS_EQUAL = "Числа равны!";
+    const string NUMBERS_NOT_EQUAL = "Числа не равны!";
+    const string PRODUCT_NUMBERS = "Произведение чисел = ";
 
     Rational(int valueNumerator = 2, int valueDenominator = 4) {
         numerator = valueNumerator;
-        denominator = valueDenominator;
+        denominator = isDenominatorNotZero(valueDenominator);
     }
+
     int GetNumerator() {
         return numerator;
     }
+
     int GetDenomirator() {
         return denominator;
     }
+
     int GetInteger() {
         return integer;
     }
+
     void SetNumerator(int valueNumerator) {
         numerator = valueNumerator;
     }
+
     void SetDenominator(int valueDenominator) {
-        denominator = valueDenominator;
+        denominator = isDenominatorNotZero(valueDenominator);
     }
+
     void SetInteger(int valueInteger) {
         integer = valueInteger;
     }
-    void Print() {
-        cout << "Вы ввели РЧ " << numerator << "/" << (float)denominator << endl;
+
+    int isDenominatorNotZero(int valueForCheck) {
+        if (valueForCheck == 0) {
+            return 1;
+        } else {
+            return valueForCheck;
+        }
     }
+
+    void Print() {
+        cout << "Вы ввели РЧ " << numerator << "/" << (float) denominator << endl;
+    }
+
     void Print(float x) {
         cout << "\nЭто число в десятичной форме имеет вид " << x << endl;
     }
+
     void Print(int x) {
         cout << "\nВы ввели целое число " << x << endl;
     }
-    operator float();
-    void Composition(float x, float y){
+
+    void Composition(float x, float y) {
         float composition;
         composition = x * y;
-        cout << "Произведение чисел " << composition << endl;
+        cout << PRODUCT_NUMBERS << composition << endl;
     }
+
     void Composition(int x, float y) {
         float composition;
         composition = x * y;
-        cout << "Произведение чисел " << composition << endl;
+        cout << PRODUCT_NUMBERS << composition << endl;
     }
-    void Equality(float x, float y){
+
+    void Equality(float x, float y) {
         if (x == y)
-            cout << "Числа равны" << endl;
+            cout << NUMBERS_EQUAL << endl;
         else
-            cout << "Числа не равны!" << endl;
+            cout << NUMBERS_NOT_EQUAL << endl;
     }
+
     void Equality(int x, float y) {
         if (x == y)
-            cout << "Числа равны" << endl;
+            cout << NUMBERS_EQUAL << endl;
         else
-            cout << "Числа не равны!" << endl;
+            cout << NUMBERS_NOT_EQUAL << endl;
     }
+
+    operator float();
 };
-Rational::operator float()
-{
-    return (float)numerator / denominator;
+
+Rational::operator float() {
+    return (float) numerator / denominator;
 }
 
 
 int main() {
     system("chcp 65001");
+
     int num, dem, integer;
-    float x, y, proizv;
+    float x, y;
     Rational numDelDem;
 
 
@@ -91,12 +117,11 @@ int main() {
         puts("1. Посмотрить РЧ в десятичном виде");
         puts("2. Умножить РЧ на РЧ");
         puts("3. Проверить РЧ и РЧ на равенство");
-        puts ("4 Умножить РЧ на целое число");
-        puts ("5 Проверить РЧ и целое число на равенство");
+        puts("4. Умножить РЧ на целое число");
+        puts("5. Проверить РЧ и целое число на равенство");
         puts("6. Выход");
         menu = getchar();
-        switch (menu)
-        {
+        switch (menu) {
             case '1': {
                 cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
@@ -105,13 +130,12 @@ int main() {
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
-                x = (float)numDelDem;
+                x = (float) numDelDem;
                 numDelDem.Print(x);
                 system("pause");
                 break;
             }
-            case '2':
-            {
+            case '2': {
                 cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
                 cout << numDelDem.ENTER_DENOMINATOR << endl;
@@ -119,22 +143,21 @@ int main() {
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
-                x = (float)numDelDem;
+                x = (float) numDelDem;
 
                 cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
-                cout << numDelDem.ENTER_DENOMINATOR<< endl;
+                cout << numDelDem.ENTER_DENOMINATOR << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
-                y = (float)numDelDem;
+                y = (float) numDelDem;
                 numDelDem.Composition(x, y);
 
                 system("pause");
                 break;
             }
-            case '3':
-            {
+            case '3': {
                 cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
                 cout << numDelDem.ENTER_DENOMINATOR << endl;
@@ -142,7 +165,7 @@ int main() {
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
-                x = (float)numDelDem;
+                x = (float) numDelDem;
 
                 cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
@@ -151,12 +174,11 @@ int main() {
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
-                y = (float)numDelDem;
+                y = (float) numDelDem;
                 numDelDem.Equality(x, y);
                 system("pause");
             }
-            case '4':
-            {
+            case '4': {
                 cout << numDelDem.ENTER_INTEGER << endl;
                 cin >> integer;
                 numDelDem.SetInteger(integer);
@@ -164,17 +186,17 @@ int main() {
 
                 cout << numDelDem.ENTER_NUMERATOR << endl;
                 cin >> num;
-                cout << numDelDem.ENTER_DENOMINATOR<< endl;
+                cout << numDelDem.ENTER_DENOMINATOR << endl;
                 cin >> dem;
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
-                y = (float)numDelDem;
+                y = (float) numDelDem;
                 numDelDem.Composition(integer, y);
 
                 system("pause");
                 break;
             }
-            case '5':{
+            case '5': {
                 cout << numDelDem.ENTER_INTEGER << endl;
                 cin >> integer;
                 numDelDem.SetInteger(integer);
@@ -187,7 +209,7 @@ int main() {
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 numDelDem.Print();
-                y = (float)numDelDem;
+                y = (float) numDelDem;
                 numDelDem.Equality(integer, y);
                 system("pause");
             }
@@ -200,4 +222,3 @@ int main() {
     } while (true);
     return 0;
 }
-
