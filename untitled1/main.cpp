@@ -11,9 +11,12 @@ using namespace std;
 class Rational {
     int numerator; //числитель
     int denominator; //знаменатель
+    int integer;
 public:
     const string ENTER_NUMERATOR = "Введите числитель: ";
     const string ENTER_DENOMINATOR = "Введите знаменатель: ";
+    const string ENTER_INTEGER = "Введите целое число: ";
+
     Rational(int valueNumerator = 2, int valueDenominator = 4) {
         numerator = valueNumerator;
         denominator = valueDenominator;
@@ -24,17 +27,26 @@ public:
     int GetDenomirator() {
         return denominator;
     }
+    int GetInteger() {
+        return integer;
+    }
     void SetNumerator(int valueNumerator) {
         numerator = valueNumerator;
     }
     void SetDenominator(int valueDenominator) {
         denominator = valueDenominator;
     }
+    void SetInteger(int valueInteger) {
+        integer = valueInteger;
+    }
     void Print() {
-        cout << "Вы ввели " << numerator << "/" << (float)denominator << endl;
+        cout << "Вы ввели РЧ " << numerator << "/" << (float)denominator << endl;
     }
     void Print(float x) {
         cout << "\nЭто число в десятичной форме имеет вид " << x << endl;
+    }
+    void Print(int x) {
+        cout << "\nВы ввели целое число " << x << endl;
     }
     operator float();
     void Composition(float x, float y){
@@ -68,7 +80,7 @@ Rational::operator float()
 
 int main() {
     system("chcp 65001");
-    int num, dem;
+    int num, dem, integer;
     float x, y, proizv;
     Rational numDelDem;
 
@@ -77,9 +89,11 @@ int main() {
     do {
         system("CLS");
         puts("1. Посмотрить РЧ в десятичном виде");
-        puts("2. Умножить два РЧ или РЧ и целое число");
-        puts("3. Проверить числа на равенство");
-        puts("4. Выход");
+        puts("2. Умножить РЧ на РЧ");
+        puts("3. Проверить РЧ и РЧ на равенство");
+        puts ("4 Умножить РЧ на целое число");
+        puts ("5 Проверить РЧ и целое число на равенство");
+        puts("6. Выход");
         menu = getchar();
         switch (menu)
         {
@@ -114,7 +128,7 @@ int main() {
                 numDelDem.SetDenominator(dem);
                 numDelDem.SetNumerator(num);
                 y = (float)numDelDem;
-                numDelDem.Composition(num, dem);
+                numDelDem.Composition(x, y);
 
                 system("pause");
                 break;
@@ -142,9 +156,46 @@ int main() {
                 system("pause");
             }
             case '4':
+            {
+                cout << numDelDem.ENTER_INTEGER << endl;
+                cin >> integer;
+                numDelDem.SetInteger(integer);
+                numDelDem.Print(integer);
+
+                cout << numDelDem.ENTER_NUMERATOR << endl;
+                cin >> num;
+                cout << numDelDem.ENTER_DENOMINATOR<< endl;
+                cin >> dem;
+                numDelDem.SetDenominator(dem);
+                numDelDem.SetNumerator(num);
+                y = (float)numDelDem;
+                numDelDem.Composition(integer, y);
+
+                system("pause");
+                break;
+            }
+            case '5':{
+                cout << numDelDem.ENTER_INTEGER << endl;
+                cin >> integer;
+                numDelDem.SetInteger(integer);
+                numDelDem.Print(integer);
+
+                cout << numDelDem.ENTER_NUMERATOR << endl;
+                cin >> num;
+                cout << numDelDem.ENTER_DENOMINATOR << endl;
+                cin >> dem;
+                numDelDem.SetDenominator(dem);
+                numDelDem.SetNumerator(num);
+                numDelDem.Print();
+                y = (float)numDelDem;
+                numDelDem.Equality(integer, y);
+                system("pause");
+            }
+            case '6': {
                 system("CLS");
                 return 0;
                 break;
+            }
         }
     } while (true);
     return 0;
