@@ -13,8 +13,6 @@ const string ERROR_INPUT = "Ошибка ввода, попробуйте еще
 const string ENTER_INTEGER = "Введите целое число: ";
 const string NUMBERS_EQUAL = "Числа равны!";
 const string NUMBERS_NOT_EQUAL = "Числа не равны!";
-const string PRODUCT_NUMBERS = "Произведение чисел = ";
-const string FIRST_NUMBER = "Первое число ";
 
 class Rational {
 private:
@@ -22,8 +20,6 @@ private:
     int denominator; //знаменатель
 
 public:
-
-
     Rational(int valueNumerator = 2, int valueDenominator = 3) {
         numerator = valueNumerator;
         denominator = valueDenominator;
@@ -75,7 +71,8 @@ public:
 
     friend void rationalOrInteger(Rational firstOperand);
 
-    friend void newValue(Rational obj);
+    friend void newValue(Rational &obj);
+
 };
 
 void rationalXRational(Rational firstOperand, Rational secondOperand) {
@@ -106,10 +103,8 @@ void rationalOrRational(Rational firstOperand, Rational secondOperand) {
     cout << NUMBER_A << firstOperand << endl;
     cin >> secondOperand;
     cout << NUMBER_B << secondOperand;
-    if (operator==(firstOperand, secondOperand))
-        cout << NUMBERS_EQUAL << endl;
-    else
-        cout << NUMBERS_NOT_EQUAL << endl;
+    string result = operator==(firstOperand, secondOperand) ? NUMBERS_EQUAL : NUMBERS_NOT_EQUAL;
+    cout << result << endl;
 }
 
 void rationalOrInteger(Rational firstOperand) {
@@ -124,13 +119,13 @@ void rationalOrInteger(Rational firstOperand) {
         cin.ignore(256, '\n');
         cin >> integer;
     }
-    if (operator==(integer, firstOperand))
-        cout << NUMBERS_EQUAL << endl;
-    else
-        cout << NUMBERS_NOT_EQUAL << endl;
+
+
+    string result = operator==(integer, firstOperand) ? NUMBERS_EQUAL : NUMBERS_NOT_EQUAL;
+    cout << result << endl;
 }
 
-void newValue(Rational obj) {
+void newValue(Rational &obj) {
     system("CLS");
     cin >> obj;
     cout << "Значение установлено!\nТеперь А = " << obj << endl;
@@ -143,11 +138,10 @@ istream& operator>>(istream& in, Rational& rational) {
     cout << ENTER_DENOMINATOR << endl;
     in >> den;
     rational.setNumerator(num);
-    if (den != 0) {
+    if (den != 0)
         rational.setDenominator(den);
-    }
-    else {
-        cout << "Знаменателя 0 быть не может!\nЗнаменать = " << N << endl;
+    else{
+        cout << "Знаменателя 0 быть не может!\nЗнаменатель = " << N << endl;
         rational.setDenominator(N);
     }
     return in;
@@ -170,10 +164,10 @@ ostream& operator<<(ostream& out, Rational rational) {
 void end();
 
 int main() {
-    setlocale(LC_ALL, "rus");
+    system("chcp 65001");
 
     Rational firstRationalNumber;
-    Rational secondRationalNumber(2, 5);
+    Rational secondRationalNumber = Rational(2, 5);
     Rational copiedRationalNumber(secondRationalNumber);
     char menu;
     do {
@@ -208,15 +202,14 @@ int main() {
                 end();
                 break;
             }
-                /*case '5': {
-                    newValue(secondRationalNumber);
-                    end();
-                    break;
-                }*/
+            case '5': {
+                newValue(secondRationalNumber);
+                end();
+                break;
+            }
             case '6': {
                 system("CLS");
                 return 0;
-                break;
             }
         }
     } while (true);
