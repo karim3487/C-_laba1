@@ -7,8 +7,8 @@ using namespace std;
 const string NUMBER_A = "Число A = ";
 const string NUMBER_B = "Число В = ";
 const string A_AND_B = "A * B = ";
-const string ENTER_NUMERATOR = "Введите числитель: ";
-const string ENTER_DENOMINATOR = "Введите знаменатель: ";
+const string ENTER_NUM_DEN = "Введите число В (сначала знаменатель, затем числитель)";
+const string ENTER_NUM_DEN_A = "Введите число A (сначала знаменатель, затем числитель";
 const string ERROR_INPUT = "Ошибка ввода, попробуйте еще раз: ";
 const string ENTER_INTEGER = "Введите целое число: ";
 const string NUMBERS_EQUAL = "Числа равны!";
@@ -63,85 +63,17 @@ public:
 
     friend bool operator==(Rational r1, Rational r2);
 
-    friend void rationalXRational(Rational firstOperand, Rational secondOperand);
-
-    friend void rationalOrRational(Rational firstOperand, Rational secondOperand);
-
-    friend void rationalXInteger(Rational firstOperand);
-
-    friend void rationalOrInteger(Rational firstOperand);
-
-    friend void newValue(Rational &obj);
-
+    friend bool operator==(int integer, Rational r2);
 };
-
-void rationalXRational(Rational firstOperand, Rational secondOperand) {
-    system("CLS");
-    cout << NUMBER_A << firstOperand << endl;
-    cin >> secondOperand;
-    cout << NUMBER_B << secondOperand;
-    cout << A_AND_B << secondOperand.operator*(firstOperand) << endl;
-}
-
-void rationalXInteger(Rational firstOperand) {
-    system("CLS");
-    int integer;
-    cout << NUMBER_A << firstOperand << endl;
-    cout << ENTER_INTEGER << NUMBER_B << endl;
-    cin >> integer;
-    while (cin.fail()) {
-        cout << ERROR_INPUT;
-        cin.clear();
-        cin.ignore(256, '\n');
-        cin >> integer;
-    }
-    cout << "А * В = " << firstOperand.operator*(integer) << endl;
-}
-
-void rationalOrRational(Rational firstOperand, Rational secondOperand) {
-    system("CLS");
-    cout << NUMBER_A << firstOperand << endl;
-    cin >> secondOperand;
-    cout << NUMBER_B << secondOperand;
-    string result = operator==(firstOperand, secondOperand) ? NUMBERS_EQUAL : NUMBERS_NOT_EQUAL;
-    cout << result << endl;
-}
-
-void rationalOrInteger(Rational firstOperand) {
-    system("CLS");
-    int integer;
-    cout << NUMBER_A << firstOperand << endl;
-    cout << ENTER_INTEGER << NUMBER_B << endl;
-    cin >> integer;
-    while (cin.fail()) {
-        cout << ERROR_INPUT;
-        cin.clear();
-        cin.ignore(256, '\n');
-        cin >> integer;
-    }
-
-
-    string result = operator==(integer, firstOperand) ? NUMBERS_EQUAL : NUMBERS_NOT_EQUAL;
-    cout << result << endl;
-}
-
-void newValue(Rational &obj) {
-    system("CLS");
-    cin >> obj;
-    cout << "Значение установлено!\nТеперь А = " << obj << endl;
-}
 
 istream& operator>>(istream& in, Rational& rational) {
     int num, den;
-    cout << ENTER_NUMERATOR << endl;
     in >> num;
-    cout << ENTER_DENOMINATOR << endl;
     in >> den;
     rational.setNumerator(num);
     if (den != 0)
         rational.setDenominator(den);
-    else{
-        cout << "Знаменателя 0 быть не может!\nЗнаменатель = " << N << endl;
+    else {
         rational.setDenominator(N);
     }
     return in;
@@ -164,7 +96,7 @@ ostream& operator<<(ostream& out, Rational rational) {
 void end();
 
 int main() {
-    system("chcp 65001");
+    setlocale(LC_ALL, "rus");
 
     Rational firstRationalNumber;
     Rational secondRationalNumber = Rational(2, 5);
@@ -180,30 +112,64 @@ int main() {
         puts("6. Выход");
         menu = getchar();
         switch (menu) {
-            case '1': {
-                rationalXRational(secondRationalNumber, firstRationalNumber);
+            case '1':
+                system("CLS");
+                cout << NUMBER_A << secondRationalNumber << endl;
+                cout << ENTER_NUM_DEN << endl;
+                cin >> firstRationalNumber;
+                cout << NUMBER_B << firstRationalNumber;
+                cout << A_AND_B << secondRationalNumber * firstRationalNumber << endl;
+                end();
+                break;
+            case '2': {
+                system("CLS");
+                int integer;
+                cout << NUMBER_A << secondRationalNumber << endl;
+                cout << ENTER_INTEGER << NUMBER_B << endl;
+                cin >> integer;
+                while (cin.fail()) {
+                    cout << ERROR_INPUT;
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cin >> integer;
+                }
+                cout << A_AND_B << integer * secondRationalNumber << endl;
                 end();
                 break;
             }
-            case '2': {
-
-                rationalXInteger(secondRationalNumber);
-                system("pause");
-                system("CLS");
-                break;
-            }
             case '3': {
-                rationalOrRational(secondRationalNumber, firstRationalNumber);
+                system("CLS");
+                cout << NUMBER_A << secondRationalNumber << endl;
+                cout << ENTER_NUM_DEN << endl;
+                cin >> firstRationalNumber;
+                cout << NUMBER_B << firstRationalNumber;
+                string result = operator==(secondRationalNumber, firstRationalNumber) ? NUMBERS_EQUAL : NUMBERS_NOT_EQUAL;
+                cout << result << endl;
                 end();
                 break;
             }
             case '4': {
-                rationalOrInteger(copiedRationalNumber);
+                system("CLS");
+                int integer;
+                cout << NUMBER_A << secondRationalNumber << endl;
+                cout << ENTER_INTEGER << NUMBER_B << endl;
+                cin >> integer;
+                while (cin.fail()) {
+                    cout << ERROR_INPUT;
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    cin >> integer;
+                }
+                string result = operator==(integer, secondRationalNumber) ? NUMBERS_EQUAL : NUMBERS_NOT_EQUAL;
+                cout << result << endl;
                 end();
                 break;
             }
             case '5': {
-                newValue(secondRationalNumber);
+                system("CLS");
+                cout << ENTER_NUM_DEN_A << endl;
+                cin >> secondRationalNumber;
+                cout << "Значение установлено!\nТеперь А = " << secondRationalNumber << endl;
                 end();
                 break;
             }
@@ -213,7 +179,6 @@ int main() {
             }
         }
     } while (true);
-    return 0;
 }
 
 void end() {
