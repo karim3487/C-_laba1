@@ -44,13 +44,14 @@ public:
         denominator = valueDenominator;
     }
 
-
-    float operator*(float val) {
-        return operator float() * val;
+    Rational operator*(Rational& r2) {
+        Rational result(numerator*r2.numerator, denominator*r2.denominator);
+        return result;
     }
 
-    float operator*(int val) {
-        return operator float() * val;
+    Rational operator*(int val) {
+        Rational result(numerator * val);
+        return result;
     }
 
     operator float() {
